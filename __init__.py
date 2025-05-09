@@ -21,6 +21,11 @@ jwt = JWTManager(app)
 def hello_world():
     return render_template('accueil.html')
 
+#Route admin
+@app.route("/admin", methods=["POST"])
+def admin(access_token):
+    return jsonify(access_token=access_token)
+
 # Création d'une route qui vérifie l'utilisateur et retour un Jeton JWT si ok.
 # La fonction create_access_token() est utilisée pour générer un jeton JWT.
 @app.route("/login", methods=["POST"])
@@ -28,21 +33,12 @@ def login():
     username = request.json.get("username", None)
     password = request.json.get("password", None)
     if username != "test" or password != "test":
-        return jsonify({"msg": "Mauvais utilisateur ou mot de passe"}), 401
-
+        if username != "admin" or password != "admin1":
+            return jsonify({"msg": "Mauvais utilisateur ou mot de passe"}), 401
+        access_token = create_access_token(identity={"username": username, "role": "admin"})
+        admin(access_token)
+        
     access_token = create_access_token(identity={"username": username, "role": "user"})
-    return jsonify(access_token=access_token)
-
-
-#Route admin
-@app.route("/admin", methods=["POST"])
-def admin():
-    username = request.json.get("username", None)
-    password = request.json.get("password", None)
-    if username != "admin" or password != "admin1":
-        return jsonify({"msg": "Mauvais utilisateur ou mot de passe"}), 401
-
-    access_token = create_access_token(identity={"username": username, "role": "admin"})
     return jsonify(access_token=access_token)
 
 # Route protégée par un jeton valide

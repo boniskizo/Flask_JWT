@@ -34,6 +34,17 @@ def login():
     return jsonify(access_token=access_token)
 
 
+#Route admin
+@app.route("/admin", methods=["POST"])
+def admin():
+    username = request.json.get("username", None)
+    password = request.json.get("password", None)
+    if username != "admin" or password != "admin1":
+        return jsonify({"msg": "Mauvais utilisateur ou mot de passe"}), 401
+
+    access_token = create_access_token(identity=username)
+    return jsonify(access_token=access_token)
+
 # Route protégée par un jeton valide
 @app.route("/protected", methods=["GET"])
 @jwt_required()

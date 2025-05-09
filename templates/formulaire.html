@@ -2,18 +2,85 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Login</title>
+  <title>Connexion</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-container {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      width: 300px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+      transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      border-color: #74ebd5;
+      outline: none;
+    }
+
+    button {
+      background: #74ebd5;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #57c3b2;
+    }
+  </style>
 </head>
 <body>
-  <h1>Connexion</h1>
-  <form method="POST" action="/login">
-    <label for="username">Nom d'utilisateur:</label>
-    <input type="text" name="username" id="username" required>
-    <br>
-    <label for="password">Mot de passe:</label>
-    <input type="password" name="password" id="password" required>
-    <br>
-    <button type="submit">Se connecter</button>
-  </form>
+  <div class="login-container">
+    <h1>Connexion</h1>
+    <form method="POST" action="/login">
+      <label for="username">Nom d'utilisateur :</label>
+      <input type="text" name="username" id="username" required>
+
+      <label for="password">Mot de passe :</label>
+      <input type="password" name="password" id="password" required>
+
+      <button type="submit">Se connecter</button>
+    </form>
+  </div>
 </body>
 </html>

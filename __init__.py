@@ -30,7 +30,7 @@ def login():
     if username != "test" or password != "test":
         return jsonify({"msg": "Mauvais utilisateur ou mot de passe"}), 401
 
-    access_token = create_access_token(identity=username)
+    access_token = create_access_token(identity={"username": username, "role": "user"})
     return jsonify(access_token=access_token)
 
 
@@ -42,7 +42,7 @@ def admin():
     if username != "admin" or password != "admin1":
         return jsonify({"msg": "Mauvais utilisateur ou mot de passe"}), 401
 
-    access_token = create_access_token(identity=username)
+    access_token = create_access_token(identity={"username": username, "role": "admin"})
     return jsonify(access_token=access_token)
 
 # Route protégée par un jeton valide

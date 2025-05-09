@@ -54,3 +54,7 @@ def protected():
                                                                                                                
 if __name__ == "__main__":
   app.run(debug=True)
+
+@app.route('/formulaire')
+def formulaire():
+    return render_template('formulaire.html')
